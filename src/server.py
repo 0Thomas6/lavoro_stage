@@ -136,6 +136,8 @@ def add_poszio():
 # -----------------------------------------------------------------------------------------------------
 
 
+
+# ----- DIPENDENTI ------------------------------------------------------------------------------------
 @app.route("/api/get_dipend", methods=["GET"])
 def get_dipend():
     dipend = DataDipend()
@@ -147,6 +149,57 @@ def get_dipend():
         return jsonify(status=500, error=e)
 
 
+@app.route("/api/update_dipend", methods=["POST"])
+def update_dipend():
+    if request.json:
+        dipend_data = request.json["dipend_data"]
+        dipend = DataDipend()
+        try:
+            dipend_res = dipend.update_dipend(dipend_data)
+            if dipend_res:
+                return jsonify(status=200)
+            else:
+                return jsonify(status=500)
+        except Exception as e:
+            print(e)
+            return jsonify(status=500, error=e)
+
+
+@app.route("/api/toggle_delete_dipend", methods=["POST"])
+def toggle_delete_dipend():
+    if request.json:
+        dipend_data = request.json["dipend_data"]
+        dipend = DataDipend()
+        try:
+            dipend_res = dipend.toggle_delete_dipend(dipend_data)
+            if dipend_res:
+                return jsonify(status=200)
+            else:
+                return jsonify(status=500)
+        except Exception as e:
+            print(e)
+            return jsonify(status=500, error=e)
+
+
+@app.route("/api/add_dipend", methods=["POST"])
+def add_dipend():
+    if request.json:
+        dipend_data = request.json["dipend_data"]
+        dipend = DataDipend()
+        try:
+            dipend_res = dipend.add_dipend(dipend_data)
+            if dipend_res:
+                return jsonify(status=200)
+            else:
+                return jsonify(status=500)
+        except Exception as e:
+            print(e)
+            return jsonify(status=500, error=e)
+
+# -----------------------------------------------------------------------------------------------------
+
+
+# ----- REPARTI ---------------------------------------------------------------------------------------
 @app.route("/api/get_repart", methods=["GET"])
 def get_repart():
     repart = DataRepart()
@@ -156,6 +209,58 @@ def get_repart():
     except Exception as e:
         print(e)
         return jsonify(status=500, error=e)
+
+
+@app.route("/api/update_repart", methods=["POST"])
+def update_repart():
+    if request.json:
+        repart_data = request.json["repart_data"]
+        repart = DataRepart()
+        try:
+            repart_res = repart.update_repart(repart_data)
+            if repart_res:
+                return jsonify(status=200)
+            else:
+                return jsonify(status=500)
+        except Exception as e:
+            print(e)
+            return jsonify(status=500, error=e)
+
+
+@app.route("/api/toggle_delete_repart", methods=["POST"])
+def toggle_delete_repart():
+    if request.json:
+        repart_data = request.json["repart_data"]
+        repart = DataRepart()
+        try:
+            repart_res = repart.toggle_delete_repart(repart_data)
+            if repart_res:
+                return jsonify(status=200)
+            else:
+                return jsonify(status=500)
+        except Exception as e:
+            print(e)
+            return jsonify(status=500, error=e)
+
+
+@app.route("/api/add_repart", methods=["POST"])
+def add_repart():
+    if request.json:
+        repart_data = request.json["repart_data"]
+        repart = DataRepart()
+        try:
+            repart_res = repart.add_repart(repart_data)
+            if repart_res:
+                return jsonify(status=200)
+            else:
+                return jsonify(status=500)
+        except Exception as e:
+            print(e)
+            return jsonify(status=500, error=e)
+
+
+
+# -----------------------------------------------------------------------------------------------------
 
 
 if __name__ == '__main__':

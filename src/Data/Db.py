@@ -256,6 +256,66 @@ class DataDipend:
         else:
             return False
 
+    def update_dipend(self, dipend_data):
+        ok = True
+        try:
+            with con.cursor() as cur:
+                query = "UPDATE " + self.dipend_db + " " \
+                        "SET DPMAT = '" + dipend_data['dpmat'] + "', " \
+                            "DPNOM = '" + dipend_data['dpnom'] + "', " \
+                            "DPCOG = '" + dipend_data['dpcog'] + "', " \
+                            "DPREP = '" + dipend_data['dprep'] + "', " \
+                            "DPOBS = " + str(dipend_data['dpobs']) + " " \
+                        "WHERE RECORD_ID = " + str(dipend_data['record_id'])
+
+                cur.execute(query)
+
+        except Exception as e:
+            logging.error(e)
+            ok = False
+
+        if ok:
+            return True
+        else:
+            return False
+
+    def add_dipend(self, dipend_data):
+        ok = True
+        try:
+            with con.cursor() as cur:
+                query = "INSERT INTO " + self.dipend_db + " (DPMAT, DPNOM, DPCOG, DPREP) " \
+                        "VALUES ( '" + dipend_data['dpmat'] + "', '" + dipend_data['dpnom'] + "', '" \
+                                    + dipend_data['dpcog'] + "', '" + dipend_data['dprep'] + "', "
+
+                cur.execute(query)
+        except Exception as e:
+            logging.error(e)
+            ok = False
+
+        if ok:
+            return True
+        else:
+            return False
+
+    def toggle_delete_dipend(self,dipend_data):
+        ok = True
+        try:
+            with con.cursor() as cur:
+                query = "UPDATE " + self.dipend_db + " " \
+                        "SET DPOBS = " + str(dipend_data['dpobs']) + " " \
+                        "WHERE RECORD_ID = " + str(dipend_data['record_id'])
+                cur.execute(query)
+
+        except Exception as e:
+            logging.error(e)
+            ok = False
+
+        if ok:
+            return True
+        else:
+            return False
+
+
 
 class DataRepart:
     def __init__(self):
@@ -288,6 +348,67 @@ class DataRepart:
              return repart_data_res
         else:
              return False
+
+
+    def update_repart(self, repart_data):
+        ok = True
+        try:
+            with con.cursor() as cur:
+                query = "UPDATE " + self.repart_db + " " \
+                        "SET CDREP = '" + repart_data['cdrep'] + "', " \
+                            "RPDES = '" + repart_data['rpdes'] + "', " \
+                            "RPOBS = " + str(repart_data['rpobs']) + " " \
+                        "WHERE RECORD_ID = " + str(repart_data['record_id'])
+
+                cur.execute(query)
+
+        except Exception as e:
+            logging.error(e)
+            ok = False
+
+        if ok:
+            return True
+        else:
+            return False
+
+    def add_repart(self, repart_data):
+        ok = True
+        try:
+            with con.cursor() as cur:
+                query = "INSERT INTO " + self.repart_db + " (CDREP, RPDES) " \
+                        "VALUES ( '" + repart_data['cdrep'] + "', '" + repart_data['rpdes'] + "') "
+
+                cur.execute(query)
+        except Exception as e:
+            logging.error(e)
+            ok = False
+
+        if ok:
+            return True
+        else:
+            return False
+
+    def toggle_delete_repart(self,repart_data):
+        ok = True
+        try:
+            with con.cursor() as cur:
+                query = "UPDATE " + self.repart_db + " " \
+                        "SET RPOBS = " + str(repart_data['rpobs']) + " " \
+                        "WHERE RECORD_ID = " + str(repart_data['record_id'])
+                cur.execute(query)
+
+        except Exception as e:
+            logging.error(e)
+            ok = False
+
+        if ok:
+            return True
+        else:
+            return False
+
+
+
+
 
 
 
