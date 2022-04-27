@@ -72,15 +72,68 @@ def add_artico():
 
 # -----------------------------------------------------------------------------------------------------
 
+
+# ----- POSTAZIONI ------------------------------------------------------------------------------------
 @app.route("/api/get_poszio", methods=["GET"])
 def get_poszio():
     poszio = DataPoszio()
     try:
-        poszio_data = poszio.get_poszio()
+        poszio_data = poszio.get_poszio
         return jsonify(status=200, data=poszio_data)
     except Exception as e:
         print(e)
         return jsonify(status=500, error=e)
+
+
+@app.route("/api/update_poszio", methods=["POST"])
+def update_poszio():
+    if request.json:
+        poszio_data = request.json["poszio_data"]
+        poszio = DataPoszio()
+        try:
+            poszio_res = poszio.update_poszio(poszio_data)
+            if poszio_res:
+                return jsonify(status=200)
+            else:
+                return jsonify(status=500)
+        except Exception as e:
+            print(e)
+            return jsonify(status=500, error=e)
+
+
+@app.route("/api/toggle_delete_poszio", methods=["POST"])
+def toggle_delete_poszio():
+    if request.json:
+        poszio_data = request.json["poszio_data"]
+        poszio = DataPoszio()
+        try:
+            poszio_res = poszio.toggle_delete_poszio(poszio_data)
+            if poszio_res:
+                return jsonify(status=200)
+            else:
+                return jsonify(status=500)
+        except Exception as e:
+            print(e)
+            return jsonify(status=500, error=e)
+
+
+@app.route("/api/add_poszio", methods=["POST"])
+def add_poszio():
+    if request.json:
+        poszio_data = request.json["poszio_data"]
+        poszio = DataPoszio()
+        try:
+            poszio_res = poszio.add_poszio(poszio_data)
+            if poszio_res:
+                return jsonify(status=200)
+            else:
+                return jsonify(status=500)
+        except Exception as e:
+            print(e)
+            return jsonify(status=500, error=e)
+
+
+# -----------------------------------------------------------------------------------------------------
 
 
 @app.route("/api/get_dipend", methods=["GET"])

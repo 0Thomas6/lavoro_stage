@@ -127,6 +127,7 @@ class DataPoszio:
     def __init__(self):
         self.poszio_db = 'pos_zio'
 
+
     def get_poszio(self):
         ok = True
         try:
@@ -157,6 +158,68 @@ class DataPoszio:
             return poszio_data_res
         else:
             return False
+
+    def update_poszio(self, poszio_data):
+        ok = True
+        try:
+            with con.cursor() as cur:
+                query = "UPDATE " + self.poszio_db + " " \
+                        "SET PSCAP = '" + poszio_data['pscap'] + "', " \
+                            "PSPIA = " + str(poszio_data['pspia']) + " " \
+                            "PSUFF = '" + poszio_data['psuff'] + "', " \
+                            "PSNUM = " + str(poszio_data['psnum']) + " " \
+                            "PSMAT = '" + poszio_data['psmat'] + "', " \
+                            "PSOBS = " + str(poszio_data['psobs']) + " " \
+                        "WHERE RECORD_ID = " + str(poszio_data['record_id'])
+
+                cur.execute(query)
+
+        except Exception as e:
+            logging.error(e)
+            ok = False
+
+        if ok:
+            return True
+        else:
+            return False
+
+    def add_poszio(self, poszio_data):
+        ok = True
+        try:
+            with con.cursor() as cur:
+                query = "INSERT INTO " + self.poszio_db + " ( PSCAP, PSPIA, PSUFF, PSNUM, PSMAT ) " \
+                        "VALUES ( '" + poszio_data['pscap'] + "', '" + poszio_data['pspia'] + "', '" \
+                                    + poszio_data['psuff'] + "', '" + poszio_data['psnum'] + "', " \
+                                    + str(poszio_data['psmat']) + " )"
+
+                cur.execute(query)
+        except Exception as e:
+            logging.error(e)
+            ok = False
+
+        if ok:
+            return True
+        else:
+            return False
+
+    def toggle_delete_poszio(self,poszio_data):
+        ok = True
+        try:
+            with con.cursor() as cur:
+                query = "UPDATE " + self.poszio_db + " " \
+                        "SET PSOBS = " + str(poszio_data['psobs']) + " " \
+                        "WHERE RECORD_ID = " + str(poszio_data['record_id'])
+                cur.execute(query)
+
+        except Exception as e:
+            logging.error(e)
+            ok = False
+
+        if ok:
+            return True
+        else:
+            return False
+
 
 
 class DataDipend:
