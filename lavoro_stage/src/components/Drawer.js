@@ -43,7 +43,7 @@ class AppDrawer extends React.Component {
                                 <ListItemIcon>
                                     <DashboardIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={'Dashboard'} />
+                                <ListItemText primary={'Cronologia'} />
                             </ListItem>
                         </Link>
                         <Divider />
